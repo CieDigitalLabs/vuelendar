@@ -1,6 +1,9 @@
 # vuelendar
 
-> A Vue.js project
+> Editable calendar/brochure with full features built with Vue.js 2
+- Add any text content 
+- Add background image 
+- Add any asset, resize, drag, drop 
 
 ## Build Setup
 
