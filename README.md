@@ -1,2 +1,5 @@
-# vue-editable-calendar
-Editable calendar with canvas element
+# vue-calendar, cleverly named Vuelendar
+Editable calendar/brochure with full features
+- Add any text content
+- Add background image
+- Add any asset, resize, drag, drop
