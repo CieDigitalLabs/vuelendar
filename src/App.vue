@@ -1,10 +1,10 @@
 <template>
   <div id="app">
     <header>
-      <span>Vue.js PWA</span>
+      <span>Vue.js PWA </span>
     </header>
     <main>
-      <img src="./assets/logo.png" alt="Vue.js PWA">
+      <a href="/calendar">Calendar</a>
       <router-view></router-view>
     </main>
   </div>
