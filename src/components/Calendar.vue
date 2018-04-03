@@ -79,12 +79,7 @@
                       <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/img/caterpie.svg">
                       <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/img/dratini.svg">
                       <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/img/eevee.svg">
-                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/img/jigglypuff.svg">
-                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/img/mankey.svg">
                       <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/img/meowth.svg">
-                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/img/pidgey.svg">
-                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/img/psyduck.svg">
-                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/img/rattata.svg">
                       <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/img/abra.svg">
                       <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/img/snorlax.svg">
                       <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/img/zubat.svg">
@@ -94,8 +89,8 @@
               <div class="card">
                   <div class="card-header">Upload image</div>
                   <div class="card-body text-center">
-                      <img id="testImage" v-if="url" class="images-item-upload" [src]="url" v-on:click="addImageOnCanvas(url);">
-                      <input type="file" v-on:change="readUrl()">
+                      <img id="testImage" v-if="url" class="images-item-upload" src='url' v-on:click="addImageOnCanvas(url);">
+                      <input type="file" v-on:change="readUrl($event)">
                       <br/>
                       <br/>
                       <div class="btn-group btn-group-justified" role="group" aria-label="...">
@@ -170,7 +165,7 @@
                   </div>
               </div>
               <br/>
-              <!-- <div class="card">
+              <div class="card">
                   <div class="card-header">Custom</div>
                   <div class="card-body">
                       <div class="custom-item" v-if="selected  && selected.type == 'group'">Group Selected</div>
@@ -186,13 +181,13 @@
                           <div class="custom-item-body">
                               <input type="range" v-model="props.opacity" v-on:change="setOpacity()">{{props.opacity}}</div>
                       </div>
-                      <div class="custom-item" v-if="selected && textEditor || selected && figureEditor">
+                      <!-- <div class="custom-item" v-if="selected && textEditor || selected && figureEditor">
                           <div class="custom-item-title">Fill</div>
                           <div class="custom-item-body">
                               <input type="text" class="form-control" [cpPosition]="'bottom'" [(colorPicker)]="props.fill" [style.background]="props.fill"
                                   [value]="props.fill" (colorPickerChange)="setFill()">
                           </div>
-                      </div>
+                      </div> -->
                       <div class="custom-item" v-if="selected && textEditor">
                           <div class="custom-item-title">Font family</div>
                           <div class="custom-item-body">
@@ -277,7 +272,7 @@
                               <input type="range" v-model="props.charSpacing" v-on:change="setCharSpacing()" step="10" min="-200" max="800">{{props.charSpacing}}</div>
                       </div>
                   </div>
-              </div> -->
+              </div>
           </div>
       </div>
       <div class="row">
@@ -301,9 +296,7 @@
 </template>
 
 <script>
-import * as fb from 'fabric';
-
-const fabric = fb.fabric;
+import { fabric } from 'fabric';
 
 export default {
   name: 'Calendar',
@@ -312,8 +305,8 @@ export default {
       test: '',
       canvas: '',
       size: {
-        width: 800,
-        height: 500,
+        width: 550,
+        height: 300,
       },
       textString: '',
       url: '',
@@ -384,9 +377,10 @@ export default {
           cornersize: 10,
           hasRotatingPoint: true,
           peloas: 12,
+          width: 300,
+          height: 300,
         });
-        image.setWidth(150);
-        image.setHeight(150);
+        image.scaleToWidth(50);
         this.extend(image, this.randomId());
         this.canvas.add(image);
         this.selectItemAfterAdded(image);
@@ -405,9 +399,9 @@ export default {
             padding: 10,
             cornersize: 10,
             hasRotatingPoint: true,
+            width: 200,
+            height: 200,
           });
-          image.setWidth(200);
-          image.setHeight(200);
           this.extend(image, this.randomId());
           this.canvas.add(image);
           this.selectItemAfterAdded(image);
@@ -416,6 +410,7 @@ export default {
     },
 
     readUrl(event) {
+      debugger;
       if (event.target.files && event.target.files[0]) {
         const reader = new FileReader();
         reader.onload = (evt) => {
@@ -479,7 +474,7 @@ export default {
     },
 
     selectItemAfterAdded(obj) {
-      this.canvas.deactivateAllWithDispatch().renderAll();
+      // this.canvas.deactivateAllWithDispatch().renderAll();
       this.canvas.setActiveObject(obj);
     },
 
@@ -491,12 +486,7 @@ export default {
     },
 
     extend(oldObj, id) {
-      const obj = oldObj;
-      obj.toObject = ((toObject => {
-        return fabric.util.object.extend(toObject.call(this), {
-          id,
-        });
-      }))(obj.toObject);
+      return Object.assign({ id }, oldObj);
     },
 
     setCanvasImage() {
@@ -515,8 +505,8 @@ export default {
 
     /* ------------------------Global actions for element------------------------ */
 
-    getActiveStyle(styleName, object) {
-      object = object || this.canvas.getActiveObject();
+    getActiveStyle(styleName, obj) {
+      const object = obj || this.canvas.getActiveObject();
       if (!object) return '';
 
       return (object.getSelectionStyles && object.isEditing)
@@ -525,8 +515,8 @@ export default {
     },
 
 
-    setActiveStyle(styleName, value, object) {
-      object = object || this.canvas.getActiveObject();
+    setActiveStyle(styleName, value, obj) {
+      const object = obj || this.canvas.getActiveObject();
       if (!object) return;
 
       if (object.setSelectionStyles && object.isEditing) {
@@ -559,7 +549,6 @@ export default {
 
     clone() {
       const activeObject = this.canvas.getActiveObject();
-      const activeGroup = this.canvas.getActiveGroup();
 
       if (activeObject) {
         let clone;
@@ -595,9 +584,8 @@ export default {
     },
 
     setId() {
-      let val = this.props.id;
-      let complete = this.canvas.getActiveObject().toObject();
-      console.log(complete);
+      const val = this.props.id;
+      const complete = this.canvas.getActiveObject().toObject();
       this.canvas.getActiveObject().toObject = () => {
         complete.id = val;
         return complete;
@@ -609,7 +597,7 @@ export default {
     },
 
     setOpacity() {
-      this.setActiveStyle('opacity', parseInt(this.props.opacity) / 100, null);
+      this.setActiveStyle('opacity', parseInt(this.props.opacity, 10) / 100, null);
     },
 
     getFill() {
@@ -641,7 +629,7 @@ export default {
     },
 
     setFontSize() {
-      this.setActiveStyle('fontSize', parseInt(this.props.fontSize), null);
+      this.setActiveStyle('fontSize', parseInt(this.props.fontSize, 10), null);
     },
 
     getBold() {
@@ -704,7 +692,7 @@ export default {
 
     removeSelected() {
       const activeObject = this.canvas.getActiveObject();
-      const activeGroup = this.canvas.getActiveGroup();
+      const activeGroup = this.canvas.getActiveObjects();
 
       if (activeObject) {
         this.canvas.remove(activeObject);
@@ -720,7 +708,7 @@ export default {
 
     bringToFront() {
       const activeObject = this.canvas.getActiveObject();
-      const activeGroup = this.canvas.getActiveGroup();
+      const activeGroup = this.canvas.getActiveObjects();
 
       if (activeObject) {
         activeObject.bringToFront();
@@ -736,7 +724,7 @@ export default {
 
     sendToBack() {
       const activeObject = this.canvas.getActiveObject();
-      const activeGroup = this.canvas.getActiveGroup();
+      const activeGroup = this.canvas.getActiveObjects();
 
       if (activeObject) {
         activeObject.sendToBack();
@@ -751,14 +739,14 @@ export default {
     },
 
     confirmClear() {
-      if (confirm('Are you sure?')) {
-        this.canvas.clear();
-      }
+      // if (confirm('Are you sure?')) {
+      this.canvas.clear();
+      // }
     },
 
     rasterize() {
       if (!fabric.Canvas.supports('toDataURL')) {
-        alert('This browser doesn\'t provide means to serialize canvas to an image');
+        // alert('This browser doesn\'t provide means to serialize canvas to an image');
       } else {
         // window.open(this.canvas.toDataURL('png'));
         const image = new Image();
@@ -813,7 +801,7 @@ export default {
       this.readUrl($event);
     },
   },
-  created() {
+  mounted() {
     // setup front side canvas
     this.canvas = new fabric.Canvas('canvas', {
       hoverCursor: 'pointer',
@@ -856,7 +844,6 @@ export default {
               this.getFontFamily();
               break;
             case 'image':
-              // console.log('image');
               break;
             default:
               this.figureEditor = true;
@@ -889,7 +876,6 @@ export default {
     width: 48%;
     cursor: pointer;
     -webkit-transition: .5s ease;
-    -webkit-transition: .5s ease;
     padding: 3px;
     max-width: 120px;
   }
@@ -902,7 +888,6 @@ export default {
     width: 80%;
     cursor: pointer;
     padding-bottom: 10px;
-    -webkit-transition: .5s ease;
     -webkit-transition: .5s ease;
   }
 
