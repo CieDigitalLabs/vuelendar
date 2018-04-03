@@ -1,5 +1,5 @@
 <template>
-  <div class="container calendar">
+  <div class="container-fluid calendar">
       <div class="row">
           <div class="col-xl-12 main-title">
               <h4></h4>
@@ -148,13 +148,12 @@
               <br/>
               <div class="card" v-if="!selected">
                   <div class="card-header">Canvas</div>
-                  <div class="card-body">
+                  <div class="card-body mx-auto">
                       <div class="custom-item" v-if="!props.canvasImage">
                           <div class="custom-item-title">Background Color</div>
-                          <!-- <div class="custom-item-body">
-                              <input type="text" class="form-control" v-bind:class="{cpPosition: 'bottom'}" [(colorPicker)]="props.canvasFill" [style.background]="props.canvasFill"
-                                  [value]="props.canvasFill" (colorPickerChange)="setCanvasFill()">
-                          </div> -->
+                          <div class="custom-item-body">
+                              <chrome-picker v-model="canvasFill" />
+                          </div>
                       </div>
                       <div class="custom-item">
                           <div class="custom-item-title">Background Image (url)</div>
@@ -297,16 +296,18 @@
 
 <script>
 import { fabric } from 'fabric';
+import { Chrome } from 'vue-color';
 
 export default {
   name: 'Calendar',
+  components: { 'chrome-picker': Chrome },
   data() {
     return {
       test: '',
       canvas: '',
       size: {
-        width: 550,
-        height: 300,
+        width: 700,
+        height: 600,
       },
       textString: '',
       url: '',
@@ -326,12 +327,18 @@ export default {
         fontFamily: null,
         TextDecoration: '',
       },
+      canvasFill: '#ffffff',
       json: '',
       globalEditor: false,
       textEditor: false,
       imageEditor: false,
       figureEditor: false,
     };
+  },
+  watch: {
+    canvasFill() {
+      this.setCanvasFill();
+    },
   },
   methods: {
     /* ------------------------Block elements------------------------ */
@@ -370,17 +377,18 @@ export default {
       const el = event.target;
       fabric.Image.fromURL(el.src, (image) => {
         image.set({
-          left: 10,
-          top: 10,
+          left: 20,
+          top: 20,
           angle: 0,
           padding: 10,
           cornersize: 10,
           hasRotatingPoint: true,
           peloas: 12,
-          width: 300,
-          height: 300,
+          width: 1400,
+          height: 1400,
         });
-        image.scaleToWidth(50);
+        image.scaleToWidth(200);
+        image.scaleToHeight(200);
         this.extend(image, this.randomId());
         this.canvas.add(image);
         this.selectItemAfterAdded(image);
@@ -479,7 +487,7 @@ export default {
 
     setCanvasFill() {
       if (!this.props.canvasImage) {
-        this.canvas.backgroundColor = this.props.canvasFill;
+        this.canvas.backgroundColor = this.canvasFill.hex;
         this.canvas.renderAll();
       }
     },
@@ -697,7 +705,7 @@ export default {
         this.canvas.remove(activeObject);
         // this.textString = '';
       } else if (activeGroup) {
-        const objectsInGroup = activeGroup.getObjects();
+        const objectsInGroup = activeGroup;
         this.canvas.discardActiveGroup();
         objectsInGroup.forEach((object) => {
           this.canvas.remove(object);
@@ -713,7 +721,7 @@ export default {
         activeObject.bringToFront();
         // activeObject.opacity = 1;
       } else if (activeGroup) {
-        const objectsInGroup = activeGroup.getObjects();
+        const objectsInGroup = activeGroup;
         this.canvas.discardActiveGroup();
         objectsInGroup.forEach((object) => {
           object.bringToFront();
@@ -729,7 +737,7 @@ export default {
         activeObject.sendToBack();
         // activeObject.opacity = 1;
       } else if (activeGroup) {
-        const objectsInGroup = activeGroup.getObjects();
+        const objectsInGroup = activeGroup; // .getObjects()
         this.canvas.discardActiveGroup();
         objectsInGroup.forEach((object) => {
           object.sendToBack();
@@ -794,11 +802,6 @@ export default {
       this.figureEditor = false;
     },
 
-  },
-  watch: {
-    uploadImageInput($event) {
-      this.readUrl($event);
-    },
   },
   mounted() {
     // setup front side canvas
