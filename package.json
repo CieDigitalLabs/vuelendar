@@ -17,6 +17,7 @@
     "bootstrap": "^4.0.0",
     "bootstrap-vue": "^2.0.0-rc.6",
     "fabric": "^2.2.3",
+    "filereader": "^0.10.3",
     "font-awesome": "^4.7.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",

@@ -89,7 +89,7 @@
               <div class="card">
                   <div class="card-header">Upload image</div>
                   <div class="card-body text-center">
-                      <img id="testImage" v-if="url" class="images-item-upload" src='url' v-on:click="addImageOnCanvas(url);">
+                      <img id="testImage" v-if="url" class="images-item-upload" v-bind:src='url' v-on:click="addImageOnCanvas(url);">
                       <input type="file" v-on:change="readUrl($event)">
                       <br/>
                       <br/>
@@ -410,7 +410,6 @@ export default {
     },
 
     readUrl(event) {
-      debugger;
       if (event.target.files && event.target.files[0]) {
         const reader = new FileReader();
         reader.onload = (evt) => {
