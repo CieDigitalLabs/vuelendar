@@ -341,6 +341,25 @@ export default {
     },
   },
   methods: {
+    initCalendarGrid(gridSize = { days: 7, weeks: 5 }) {
+      for (let x = 1; x < this.canvas.width / gridSize.days; x += 1) {
+        this.canvas.add(
+          new fabric.Line([100 * x, 0, 100 * x, 100 * gridSize.weeks], {
+            stroke: '#000000',
+            strokeWidth: 1,
+            selectable: false,
+          }),
+        );
+        this.canvas.add(
+          new fabric.Line([0, 100 * x, 100 * gridSize.days, 100 * x], {
+            stroke: '#000000',
+            strokeWidth: 1,
+            selectable: false,
+          }),
+        );
+      }
+    },
+
     /* ------------------------Block elements------------------------ */
 
     // Block "Size"
@@ -862,6 +881,7 @@ export default {
 
     this.canvas.setWidth(this.size.width);
     this.canvas.setHeight(this.size.height);
+    this.initCalendarGrid();
   },
 };
 </script>
