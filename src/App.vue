@@ -13,6 +13,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import "./node_modules/bootstrap/dist/css/bootstrap";
 @import "styles/global";
 </style>
