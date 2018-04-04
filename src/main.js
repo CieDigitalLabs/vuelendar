@@ -2,16 +2,15 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue';
 import VueLogger from 'vuejs-logger';
-import BootstrapVue from 'bootstrap-vue';
-import 'bootstrap/dist/css/bootstrap.css'; // To move to scss
-import 'bootstrap-vue/dist/bootstrap-vue.css'; // To move to scss
+import 'bootstrap';
+// import BootstrapVue from 'bootstrap-vue';
+// import 'bootstrap/dist/css/bootstrap.css'; // To move to scss
+// import 'bootstrap-vue/dist/bootstrap-vue.css'; // To move to scss
 import 'font-awesome/css/font-awesome.css';
 import App from './App';
 import router from './router';
 
-
 Vue.config.productionTip = false;
-Vue.use(BootstrapVue);
 Vue.use(VueLogger, {
   logLevel: 'debug',
   // optional : defaults to false if not specified
