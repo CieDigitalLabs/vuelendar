@@ -1,9 +1,9 @@
 # vuelendar
 
 > Editable calendar/brochure with full features built with Vue.js 2
-- Add any text content 
-- Add background image 
-- Add any asset, resize, drag, drop 
+- Add any text content
+- Add background image
+- Add any asset, resize, drag, drop
 
 ## Build Setup
 
@@ -20,6 +20,10 @@ npm run build
 # build for production and view the bundle analyzer report
 npm run build --report
 
+# check production build
+npm install -g serve
+serve dist
+
 # run unit tests
 npm run unit
 
@@ -31,3 +35,8 @@ npm test
 ```
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+## Credits
+
+fabric.js
+angular-editor-fabric-js
