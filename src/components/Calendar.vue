@@ -11,12 +11,12 @@
                           <i class="fa fa-download" aria-hidden="true"></i> Export to image</button>
                       <button data-toggle="tooltip" data-placement="bottom" title="Export to SVG" type="button" class="btn btn-primary" v-on:click="rasterizeSVG();">
                           <i class="fa fa-download" aria-hidden="true"></i> Export to SVG</button>
-                      <button data-toggle="tooltip" data-placement="bottom" title="Save in localStorage" type="button" class="btn btn-primary"
+                      <button data-toggle="tooltip" data-placement="bottom" title="Save to Titan Cloud" type="button" class="btn btn-primary"
                           v-on:click="saveCanvasToJSON();">
-                          <i class="fa fa-save" aria-hidden="true"></i> Save local</button>
-                      <button data-toggle="tooltip" data-placement="bottom" title="Load from localStorage" type="button" class="btn btn-primary"
+                          <i class="fa fa-save" aria-hidden="true"></i> Save</button>
+                      <button data-toggle="tooltip" data-placement="bottom" title="Load from Titan Cloud" type="button" class="btn btn-primary"
                           v-on:click="loadCanvasFromJSON();">
-                          <i class="fa fa-save" aria-hidden="true"></i> Load local</button>
+                          <i class="fa fa-save" aria-hidden="true"></i> Load</button>
                       <button data-toggle="tooltip" data-placement="bottom" title="Clean Canvas" type="button" class="btn btn-danger" v-on:click="confirmClear();">
                           <i class="fa fa-ban" aria-hidden="true"></i> Clean</button>
                   </div>
@@ -106,6 +106,8 @@
                   <div class="card-header">Add figure</div>
                   <div class="card-body text-center max-height">
                       <div class="btn-group btn-group-vertical" role="group" aria-label="...">
+                          <!-- <a v-on:click="addFigure('rectangle');"><i class="fas fa-circle"></i></a> -->
+
                           <button type="button" class="btn btn-primary" v-on:click="addFigure('rectangle');">Rectangle</button>
                           <button type="button" class="btn btn-primary" v-on:click="addFigure('square');">Square</button>
                           <button type="button" class="btn btn-primary" v-on:click="addFigure('triangle');">Triangle</button>
@@ -796,6 +798,7 @@ export default {
 
     saveCanvasToJSON() {
       const json = JSON.stringify(this.canvas);
+      // Temporarily save in localStorage for now
       localStorage.setItem('Kanvas', json);
     },
 
