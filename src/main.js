@@ -3,9 +3,6 @@
 import Vue from 'vue';
 import VueLogger from 'vuejs-logger';
 import 'bootstrap';
-// import BootstrapVue from 'bootstrap-vue';
-// import 'bootstrap/dist/css/bootstrap.css'; // To move to scss
-// import 'bootstrap-vue/dist/bootstrap-vue.css'; // To move to scss
 import 'font-awesome/css/font-awesome.css';
 import App from './App';
 import router from './router';
