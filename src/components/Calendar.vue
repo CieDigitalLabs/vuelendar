@@ -106,7 +106,7 @@
                   <div class="card-header">Add figure</div>
                   <div class="card-body text-center max-height">
                       <div class="btn-group btn-group-vertical" role="group" aria-label="...">
-                          <!-- <a v-on:click="addFigure('rectangle');"><i class="fas fa-circle"></i></a> -->
+                          <a v-on:click="addFigure('rectangle');"><i class="fas fa-circle"></i></a>
 
                           <button type="button" class="btn btn-primary" v-on:click="addFigure('rectangle');">Rectangle</button>
                           <button type="button" class="btn btn-primary" v-on:click="addFigure('square');">Square</button>
@@ -182,13 +182,12 @@
                           <div class="custom-item-body">
                               <input type="range" v-model="props.opacity" v-on:change="setOpacity()">{{props.opacity}}</div>
                       </div>
-                      <!-- <div class="custom-item" v-if="selected && textEditor || selected && figureEditor">
-                          <div class="custom-item-title">Fill</div>
+                      <div class="custom-item" v-if="selected && textEditor || selected && figureEditor">
+                          <div class="custom-item-title">Text Color</div>
                           <div class="custom-item-body">
-                              <input type="text" class="form-control" [cpPosition]="'bottom'" [(colorPicker)]="props.fill" [style.background]="props.fill"
-                                  [value]="props.fill" (colorPickerChange)="setFill()">
+                              <input type="text" class="form-control" v-bind:cpPosition="'bottom'" v-model="props.fill" v-on:change="setFill()">
                           </div>
-                      </div> -->
+                      </div>
                       <div class="custom-item" v-if="selected && textEditor">
                           <div class="custom-item-title">Font family</div>
                           <div class="custom-item-body">
