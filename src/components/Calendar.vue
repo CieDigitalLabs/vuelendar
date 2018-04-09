@@ -25,147 +25,7 @@
       </div>
       <hr>
       <div class="row">
-          <div class="col-xl-3">
-              <div class="card">
-                  <div class="card-header">Size</div>
-                  <div class="card-body">
-                      <div class="form-group">
-                          <div class="input-group">
-                              <input type="text" class="form-control" v-model="size.width" v-on:keyup="changeSize()">
-                              <div class="input-group-append">
-                                  <span class="input-group-text">
-                                      Width
-                                  </span>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="form-group">
-                          <div class="input-group mb-3">
-                              <input type="text" class="form-control" v-model="size.height" v-on:keyup="changeSize()">
-                              <div class="input-group-append">
-                                  <span class="input-group-text">
-                                      Height
-                                  </span>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              <br/>
-              <div class="card">
-                  <div class="card-header">Add text</div>
-                  <div class="card-body">
-                      <div class="input-group">
-                          <input type="text" class="form-control" v-model="textString">
-                          <div class="input-group-append">
-                              <span class="input-group-text">
-                                  <button id="add-text" data-toggle="tooltip" data-placement="bottom" title="Add text" class="btn btn-primary" v-on:click="addText()">
-                                      <i class="fa fa-plus" aria-hidden="true"></i>
-                                  </button>
-                              </span>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              <br/>
-              <div class="card">
-                  <div class="card-header">Add images</div>
-                  <div class="card-body max-height">
-                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/img/pikachu.svg">
-                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/img/squirtle.svg">
-                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/img/bullbasaur.svg">
-                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/img/charmander.svg">
-                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/img/bellsprout.svg">
-                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/img/caterpie.svg">
-                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/img/dratini.svg">
-                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/img/eevee.svg">
-                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/img/meowth.svg">
-                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/img/abra.svg">
-                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/img/snorlax.svg">
-                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/img/zubat.svg">
-                  </div>
-              </div>
-              <br/>
-              <div class="card">
-                  <div class="card-header">Upload image</div>
-                  <div class="card-body text-center">
-                      <img id="testImage" v-if="url" class="images-item-upload" v-bind:src='url' v-on:click="addImageOnCanvas(url);">
-                      <input type="file" v-on:change="readUrl($event)">
-                      <br/>
-                      <br/>
-                      <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                          <div class="btn-group" role="group">
-                              <button type="button" class="btn btn-outline-danger btn-sm" v-on:click="removeWhite(url);">
-                                  <i class="fa fa-times" aria-hidden="true"></i> Remove</button>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              <br/>
-              <div class="card">
-                  <div class="card-header">Add figure</div>
-                  <div class="card-body text-center max-height">
-                      <div class="btn-group btn-group-vertical" role="group" aria-label="...">
-                          <a v-on:click="addFigure('rectangle');"><i class="fas fa-circle"></i></a>
-
-                          <button type="button" class="btn btn-primary" v-on:click="addFigure('rectangle');">Rectangle</button>
-                          <button type="button" class="btn btn-primary" v-on:click="addFigure('square');">Square</button>
-                          <button type="button" class="btn btn-primary" v-on:click="addFigure('triangle');">Triangle</button>
-                          <button type="button" class="btn btn-primary" v-on:click="addFigure('circle');">Circle</button>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <div class="col-xl-6">
-              <canvas id="canvas"></canvas>
-          </div>
-          <div class="col-xl-3">
-              <div class="card">
-                  <div class="card-header">Options</div>
-                  <div class="card-body text-center">
-                      <div class="btn-group" role="group" aria-label="...">
-                          <button data-toggle="tooltip" data-placement="bottom" title="Delete element" type="button" class="btn btn-outline-danger" v-bind:class="{disabled: !selected}"
-                              v-on:click="removeSelected();">
-                              <i class="fa fa-trash" aria-hidden="true"></i>
-                          </button>
-                          <button data-toggle="tooltip" data-placement="bottom" title="Send to back" type="button" class="btn btn-outline-primary" v-bind:class="{disabled: !selected}"
-                              v-on:click="sendToBack();">
-                              <i class="fa fa-level-down" aria-hidden="true"></i>
-                          </button>
-                          <button data-toggle="tooltip" data-placement="bottom" title="Send to front" type="button" class="btn btn-outline-primary" v-bind:class="{disabled: !selected}"
-                              v-on:click="bringToFront();">
-                              <i class="fa fa-level-up" aria-hidden="true"></i>
-                          </button>
-                          <button data-toggle="tooltip" data-placement="bottom" title="Clone" type="button" class="btn btn-outline-primary" v-bind:class="{disabled: !selected || selected.type == 'group'}"
-                              v-on:click="clone();">
-                              <i class="fa fa-clone" aria-hidden="true"></i>
-                          </button>
-                          <button data-toggle="tooltip" data-placement="bottom" title="Unselect" type="button" class="btn btn-outline-primary" v-bind:class="{disabled: !selected}"
-                              v-on:click="cleanSelect()">
-                              <i class="fa fa-remove" aria-hidden="true"></i>
-                          </button>
-                      </div>
-                  </div>
-              </div>
-              <br/>
-              <div class="card" v-if="!selected">
-                  <div class="card-header">Canvas</div>
-                  <div class="card-body mx-auto">
-                      <div class="custom-item" v-if="!props.canvasImage">
-                          <div class="custom-item-title">Background Color</div>
-                          <div class="custom-item-body">
-                              <chrome-picker v-model="canvasFill" />
-                          </div>
-                      </div>
-                      <div class="custom-item">
-                          <div class="custom-item-title">Background Image (url)</div>
-                          <div class="custom-item-body">
-                              <input type="text" class="form-control" placeholder="http://example.jpg" v-model="props.canvasImage" v-on:keyup="setCanvasImage()">
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              <br/>
+          <div class="col-sm-2">
               <div class="card">
                   <div class="card-header">Custom</div>
                   <div class="card-body">
@@ -273,6 +133,119 @@
                       </div>
                   </div>
               </div>
+              <br/>
+              <div class="card">
+                  <div class="card-header">Add text</div>
+                  <div class="card-body">
+                      <div class="input-group">
+                          <input type="text" class="form-control" v-model="textString">
+                          <div class="input-group-append">
+                              <span class="input-group-text">
+                                  <button id="add-text" data-toggle="tooltip" data-placement="bottom" title="Add text" class="btn btn-primary" v-on:click="addText()">
+                                      <i class="fa fa-plus" aria-hidden="true"></i>
+                                  </button>
+                              </span>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <br/>
+              <div class="card">
+                  <div class="card-header">Add images</div>
+                  <div class="card-body max-height">
+                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/img/pikachu.svg">
+                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/img/squirtle.svg">
+                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/img/bullbasaur.svg">
+                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/img/charmander.svg">
+                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/img/bellsprout.svg">
+                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/img/caterpie.svg">
+                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/img/dratini.svg">
+                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/img/eevee.svg">
+                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/img/meowth.svg">
+                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/img/abra.svg">
+                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/img/snorlax.svg">
+                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/img/zubat.svg">
+                  </div>
+              </div>
+              <br/>
+              <div class="card">
+                  <div class="card-header">Upload image</div>
+                  <div class="card-body text-center">
+                      <img id="testImage" v-if="url" class="images-item-upload" v-bind:src='url' v-on:click="addImageOnCanvas(url);">
+                      <input type="file" v-on:change="readUrl($event)">
+                      <br/>
+                      <br/>
+                      <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                          <div class="btn-group" role="group">
+                              <button type="button" class="btn btn-outline-danger btn-sm" v-on:click="removeWhite(url);">
+                                  <i class="fa fa-times" aria-hidden="true"></i> Remove</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <br/>
+              <div class="card">
+                  <div class="card-header">Add figure</div>
+                  <div class="card-body text-center max-height">
+                      <div class="btn-group btn-group-vertical" role="group" aria-label="...">
+                          <a v-on:click="addFigure('rectangle');"><i class="fas fa-circle"></i></a>
+
+                          <button type="button" class="btn btn-primary" v-on:click="addFigure('rectangle');">Rectangle</button>
+                          <button type="button" class="btn btn-primary" v-on:click="addFigure('square');">Square</button>
+                          <button type="button" class="btn btn-primary" v-on:click="addFigure('triangle');">Triangle</button>
+                          <button type="button" class="btn btn-primary" v-on:click="addFigure('circle');">Circle</button>
+                      </div>
+                  </div>
+              </div>
+              <div class="card">
+                  <div class="card-header">Options</div>
+                  <div class="card-body text-center">
+                      <div class="btn-group" role="group" aria-label="...">
+                          <button data-toggle="tooltip" data-placement="bottom" title="Delete element" type="button" class="btn btn-outline-danger" v-bind:class="{disabled: !selected}"
+                              v-on:click="removeSelected();">
+                              <i class="fa fa-trash" aria-hidden="true"></i>
+                          </button>
+                          <button data-toggle="tooltip" data-placement="bottom" title="Send to back" type="button" class="btn btn-outline-primary" v-bind:class="{disabled: !selected}"
+                              v-on:click="sendToBack();">
+                              <i class="fa fa-level-down" aria-hidden="true"></i>
+                          </button>
+                          <button data-toggle="tooltip" data-placement="bottom" title="Send to front" type="button" class="btn btn-outline-primary" v-bind:class="{disabled: !selected}"
+                              v-on:click="bringToFront();">
+                              <i class="fa fa-level-up" aria-hidden="true"></i>
+                          </button>
+                          <button data-toggle="tooltip" data-placement="bottom" title="Clone" type="button" class="btn btn-outline-primary" v-bind:class="{disabled: !selected || selected.type == 'group'}"
+                              v-on:click="clone();">
+                              <i class="fa fa-clone" aria-hidden="true"></i>
+                          </button>
+                          <button data-toggle="tooltip" data-placement="bottom" title="Unselect" type="button" class="btn btn-outline-primary" v-bind:class="{disabled: !selected}"
+                              v-on:click="cleanSelect()">
+                              <i class="fa fa-remove" aria-hidden="true"></i>
+                          </button>
+                      </div>
+                  </div>
+              </div>
+              <br/>
+              <div class="card" v-if="!selected">
+                  <div class="card-header">Canvas</div>
+                  <div class="card-body mx-auto">
+                      <div class="custom-item" v-if="!props.canvasImage">
+                          <div class="custom-item-title">Background Color</div>
+                          <div class="custom-item-body">
+                              <chrome-picker v-model="canvasFill" />
+                          </div>
+                      </div>
+                      <div class="custom-item">
+                          <div class="custom-item-title">Background Image (url)</div>
+                          <div class="custom-item-body">
+                              <input type="text" class="form-control" placeholder="http://example.jpg" v-model="props.canvasImage" v-on:keyup="setCanvasImage()">
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <br/>
+          </div>
+          <div class="col-sm-10">
+              <canvas id="canvas"></canvas>
           </div>
       </div>
       <div class="row">
@@ -307,8 +280,8 @@ export default {
       test: '',
       canvas: '',
       size: {
-        width: 700,
-        height: 600,
+        width: 1150,
+        height: 888,
       },
       textString: '',
       url: '',
@@ -343,16 +316,17 @@ export default {
   },
   methods: {
     initCalendarGrid(gridSize = { days: 7, weeks: 5 }) {
+      const distance = 154;
       for (let x = 1; x < this.canvas.width / gridSize.days; x += 1) {
         this.canvas.add(
-          new fabric.Line([100 * x, 0, 100 * x, 100 * gridSize.weeks], {
+          new fabric.Line([distance * x, 0, distance * x, distance * gridSize.weeks], {
             stroke: '#000000',
             strokeWidth: 1,
             selectable: false,
           }),
         );
         this.canvas.add(
-          new fabric.Line([0, 100 * x, 100 * gridSize.days, 100 * x], {
+          new fabric.Line([0, distance * x, distance * gridSize.days, distance * x], {
             stroke: '#000000',
             strokeWidth: 1,
             selectable: false,
