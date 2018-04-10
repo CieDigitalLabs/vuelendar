@@ -153,18 +153,18 @@
               <div class="card">
                   <div class="card-header">Add images</div>
                   <div class="card-body max-height">
-                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/img/pikachu.svg">
-                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/img/squirtle.svg">
-                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/img/bullbasaur.svg">
-                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/img/charmander.svg">
-                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/img/bellsprout.svg">
-                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/img/caterpie.svg">
-                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/img/dratini.svg">
-                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/img/eevee.svg">
-                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/img/meowth.svg">
-                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/img/abra.svg">
-                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/img/snorlax.svg">
-                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/img/zubat.svg">
+                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/vue/img/pikachu.svg">
+                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/vue/img/squirtle.svg">
+                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/vue/img/bullbasaur.svg">
+                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/vue/img/charmander.svg">
+                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/vue/img/bellsprout.svg">
+                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/vue/img/caterpie.svg">
+                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/vue/img/dratini.svg">
+                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/vue/img/eevee.svg">
+                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/vue/img/meowth.svg">
+                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/vue/img/abra.svg">
+                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/vue/img/snorlax.svg">
+                      <img class="images-item" v-on:click="getImgPolaroid($event)" src="../assets/vue/img/zubat.svg">
                   </div>
               </div>
               <br/>
